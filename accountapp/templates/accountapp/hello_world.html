@@ -7,6 +7,17 @@
     <h1>
         Test
     </h1>
+    <!-- 서버한테 보내는 요청 명세서 // action="/account/hello_world/"로 요청을 보낸다. -->
+    <form action="/account/hello_world/" method="post">
+        <!-- {% csrf_token %} : 장고에서 제공하는 보안 기능 중 하나로 이것이 있어야 POST가 작동한다. -->
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="POST">
+    </form>
+
+    <h1>
+        {{ text }}
+    </h1>
+
 </div>
 
 {% endblock %}
