@@ -3,21 +3,31 @@
 
 {% block content %}
 
-<div style="height: 20rem; background-color: #38df81; border-radius: 1rem; margin: 2rem;">
-    <h1>
-        Test
+<div style="border-radius: 1rem; margin: 2rem; text-align: center">
+    <h1 style="font-family: 'Permanent Marker', cursive;">
+        Hello World List
     </h1>
     <!-- 서버한테 보내는 요청 명세서 // action="/account/hello_world/"로 요청을 보낸다. -->
     <form action="/account/hello_world/" method="post">
         <!-- {% csrf_token %} : 장고에서 제공하는 보안 기능 중 하나로 이것이 있어야 POST가 작동한다. -->
         {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="POST">
+        <div>
+            <input type="text" name="hello_world_input">
+
+        </div>
+
+        <div>
+            <input type="submit" class="btn btn-primary" value="POST">
+        </div>
+
+
     </form>
 
+    {% if hello_world_output %}
     <h1>
-        {{ text }}
+        {{ hello_world_output.text }}
     </h1>
-
+    {% endif %}
 </div>
 
 {% endblock %}
