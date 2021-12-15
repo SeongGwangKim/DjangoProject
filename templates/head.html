@@ -17,4 +17,19 @@
     <!-- Default CSS Link -->
     <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 
+    <!-- 폰트 가져와서 연동하기   -->
+    <style>
+        @font-face {
+            font-family: 'NanumHandWritingStar';
+            src: local('NanumHandWritingStar'),
+            url("{% static 'fonts/NanumHandWritingStar.ttf' %}") format("opentype");
+        }
+
+        @font-face {
+            font-family: 'NanumHandWritingRose';
+            src: local('NanumHandWritingRose'),
+            url("{% static 'fonts/NanumHandWritingRose.ttf' %}") format("opentype");
+        }
+    </style>
+
 </head>
