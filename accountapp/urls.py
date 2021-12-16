@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import path
 
-from accountapp.views import hello_world, AccountCreateView, AccountDetailView
+from accountapp.views import hello_world, AccountCreateView, AccountDetailView, AccountUpdateView
 
 app_name = "accountapp"
 
@@ -21,5 +21,7 @@ urlpatterns = [
     # 특정 유저의 정보를 보는 곳, 그 계정의 id(primary key)가 필요하다.
     # detail/<int:pk> /뒤에 pk라는 이름의 int 정보를 받겠다.(몇 번 유저의 정보를 받을 건지)
     path('detail/<int:pk>', AccountDetailView.as_view(), name='detail'),
+
+    path('update<int:pk>', AccountUpdateView.as_view(), name='update'),
 
 ]
