@@ -9,7 +9,7 @@
         </div>
 
         <!-- 어떤 앱에서 어떤 라우팅으로 가라 -->
-        <form action="{% url 'accountapp:delete' pk=user.pk %}" method="post">
+        <form action="{% url 'accountapp:delete' pk=target_user.pk %}" method="post">
             <!-- post를 쓰려면 장고에서 제공하는 보안 시스템때문에 {% csrf_token %}를 써야 한다.  -->
             {% csrf_token %}
 
