@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from accountapp.models import HelloWorld
 
@@ -48,4 +48,9 @@ class AccountCreateView(CreateView):
     # 회원가입을 할 때 볼 html 설정
     template_name = 'accountapp/create.html'
 
-
+# 어떤 모델을 쓸지 그 모델 안의 정보를 어떻게 시각화할지만 신경써주면 됨
+class AccountDetailView(DetailView):
+    model = User
+    # 템플릿에서 사용하는 유저 객체 이름을 다르게 설정하기 -> 다른 사람이 봐도 볼 수 있게하기
+    context_object_name = 'target_user'
+    template_name = 'accountapp/detail.html'
