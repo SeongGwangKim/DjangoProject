@@ -15,9 +15,14 @@
             {% if target_user == user %}
             <a href="{% url 'accountapp:update' pk=user.pk %}">
                 <p>
-                    Change Info
+                    비밀번호 변경(Change Password)
                 </p>
+            </a>
 
+            <a href="{% url 'accountapp:delete' pk=user.pk %}">
+                <p>
+                    계정 삭제(Delete User Account)
+                </p>
             </a>
             {% endif %}
 
