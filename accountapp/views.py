@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 
 
@@ -14,28 +14,32 @@ from accountapp.models import HelloWorld
 # 함수형 view
 def hello_world(request):
 
-    # request받은 메소드가 POST일 경우에
-    if request.method == "POST":
-        # POST로 되어 있고 hello_world_input이라는 이름을 가진 것에서 내용을 가져와서 temp에 담는다.
-        temp = request.POST.get('hello_world_input')
+    # user.is_authenticated : 유저가 로그인했는지
+    if request.user.is_authenticated:
+        # request받은 메소드가 POST일 경우에
+        if request.method == "POST":
+            # POST로 되어 있고 hello_world_input이라는 이름을 가진 것에서 내용을 가져와서 temp에 담는다.
+            temp = request.POST.get('hello_world_input')
 
-        new_hello_world = HelloWorld()
-        new_hello_world.text = temp
-        # db.sqlite3라는 db에 저장이 된다.
-        new_hello_world.save()
+            new_hello_world = HelloWorld()
+            new_hello_world.text = temp
+            # db.sqlite3라는 db에 저장이 된다.
+            new_hello_world.save()
 
-        # HelloWorld의 모든 데이터를 긁어 올 수 있다.
-        hello_world_list = HelloWorld.objects.all()
+            # HelloWorld의 모든 데이터를 긁어 올 수 있다.
+            hello_world_list = HelloWorld.objects.all()
 
-        # return HttpResponse('Hello World!')
-        #  context={'text': 'POST METHOD!!'} : text라는 이름을 가지고 있고 내용은 POST METHOD!!로 설정.
-        # return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
-        # POST 메소드가 들어왔을 때 그것을 유지하는 것이 아니라 POST 메소드가 실행될 때만 불러오게 만듦
-        return HttpResponseRedirect(reverse('accountapp:hello_world'))
+            # return HttpResponse('Hello World!')
+            #  context={'text': 'POST METHOD!!'} : text라는 이름을 가지고 있고 내용은 POST METHOD!!로 설정.
+            # return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
+            # POST 메소드가 들어왔을 때 그것을 유지하는 것이 아니라 POST 메소드가 실행될 때만 불러오게 만듦
+            return HttpResponseRedirect(reverse('accountapp:hello_world'))
+        else:
+            # HelloWorld의 모든 데이터를 긁어 올 수 있다.
+            hello_world_list = HelloWorld.objects.all()
+            return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
     else:
-        # HelloWorld의 모든 데이터를 긁어 올 수 있다.
-        hello_world_list = HelloWorld.objects.all()
-        return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
+        return HttpResponseRedirect(reverse('accountapp:login'))
 
 # class형 view
 class AccountCreateView(CreateView):
@@ -71,6 +75,22 @@ class AccountUpdateView(UpdateView):
     # 회원가입을 할 때 볼 html 설정
     template_name = 'accountapp/update.html'
 
+    # self는 AccountUpdateView를 의미한다.
+    # self.get_object() == self.request.user : pk에 해당하는 object가 현재 request를 보내는 user와 같은지 확인
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            # 금지되어 있는 곳으로 접근을 한 것을 보여준다.
+            return HttpResponseForbidden()
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            # 금지되어 있는 곳으로 접근을 한 것을 보여준다.
+            return HttpResponseForbidden()
+
 
 class AccountDeleteView(DeleteView):
     model = User
@@ -78,3 +98,17 @@ class AccountDeleteView(DeleteView):
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/delete.html'
+
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            # 금지되어 있는 곳으로 접근을 한 것을 보여준다.
+            return HttpResponseForbidden()
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            # 금지되어 있는 곳으로 접근을 한 것을 보여준다.
+            return HttpResponseForbidden()
