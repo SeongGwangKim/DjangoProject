@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <div style="text-align: center; max-width: 300px; margin: 4rem auto">
+        <div class="mb-4">
+            <h4>프로파일 생성(Profile Create)</h4>
+        </div>
+
+        <!-- 어떤 앱에서 어떤 라우팅으로 가라 -->
+        <form action="{% url 'profileapp:create' %}" method="post" enctype="multipart/form-data">
+            <!-- post를 쓰려면 장고에서 제공하는 보안 시스템때문에 {% csrf_token %}를 써야 한다.  -->
+            {% csrf_token %}
+            <!-- form_class = UserCreationForm에 의해서 {{ form }}로 설정하면 자동으로 만들어 준다. -->
+<!--            {{ form }}-->
+            {% bootstrap_form form %}
+
+        <input type="submit" class="btn btn-dark rounded-pill col-5 mt-3">
+        </form>
+    </div>
+
+{% endblock %}

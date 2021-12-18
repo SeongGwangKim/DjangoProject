@@ -6,12 +6,31 @@
         <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
             <p>
                 {{ target_user.date_joined }}
-
             </p>
-            <h2 style="font-family: 'NanumHandWritingRose';">
-                {{ target_user.username }}
 
+            <img src="{{ target_user.profile.image.url }}"
+                 alt="" style="height: 15rem; width: 15rem; border-radius: 15rem; margin-bottom: 1.5rem;">
+
+            {% if target_user.profile %}
+            <h2 style="font-family: 'NanumHandWritingRose';">
+                {{ target_user.profile.nickname }}
+
+                <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+                    수정(Edit)
+                </a>
             </h2>
+            {% else %}
+            <a href="{% url 'profileapp:create' %}">
+                <h2 style="font-family: 'NanumHandWritingRose';">
+                    프로파일 생성(Create Profile)
+                </h2>
+            </a>
+            {% endif %}
+
+            <h5 style="margin-bottom: 2rem;">
+                {{ target_user.profile.message }}
+            </h5>
+
             {% if target_user == user %}
             <a href="{% url 'accountapp:update' pk=user.pk %}">
                 <p>

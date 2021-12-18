@@ -48,6 +48,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# 새로운 기능을 추가하기 위해서는 python manage.py starteapp 만들_앱이름
+# 그 다음에 INSTALLED_APPS에 만든_앱이름을 추가시켜준다.
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'accountapp',
+    'profileapp',
 ]
 
 MIDDLEWARE = [
