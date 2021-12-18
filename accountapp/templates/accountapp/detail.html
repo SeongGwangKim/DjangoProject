@@ -8,28 +8,44 @@
                 {{ target_user.date_joined }}
             </p>
 
+
+
+            {% if target_user.profile %}
+
             <img src="{{ target_user.profile.image.url }}"
                  alt="" style="height: 15rem; width: 15rem; border-radius: 15rem; margin-bottom: 1.5rem;">
 
-            {% if target_user.profile %}
+
+
             <h2 style="font-family: 'NanumHandWritingRose';">
                 {{ target_user.profile.nickname }}
-
+                {% if target_user == user %}
                 <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
                     수정(Edit)
                 </a>
+                {% endif %}
             </h2>
+
+            <h5 style="margin-bottom: 2rem;">
+                {{ target_user.profile.message }}
+            </h5>
+
             {% else %}
+            {% if target_user == user %}
             <a href="{% url 'profileapp:create' %}">
                 <h2 style="font-family: 'NanumHandWritingRose';">
                     프로파일 생성(Create Profile)
                 </h2>
             </a>
+            {% else %}
+            <h2>
+                닉네임 미설정
+            </h2>
+
+            {% endif %}
             {% endif %}
 
-            <h5 style="margin-bottom: 2rem;">
-                {{ target_user.profile.message }}
-            </h5>
+
 
             {% if target_user == user %}
             <a href="{% url 'accountapp:update' pk=user.pk %}">
