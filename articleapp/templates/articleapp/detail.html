@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <div style="font-size: 2rem;">
+    <div style="font-size: 1rem;">
         <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
             <h1>
                 {{ target_article.title }}
@@ -34,6 +34,11 @@
             </a>
             {% endif %}
             <hr>
+
+            {% for comment in target_article.comment.all %}
+                {% include 'commentapp/detail.html' with comment=comment %}
+
+            {% endfor %}
 
             {% include 'commentapp/create.html' with article=target_article %}
 
