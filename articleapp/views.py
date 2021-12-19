@@ -4,10 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic.edit import FormMixin
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
+from commentapp.forms import CommentCreationForm
 
 
 @method_decorator(login_required, 'get')
@@ -28,8 +30,9 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(DetailView, FormMixin):
     model = Article
+    form_class = CommentCreationForm
     context_object_name = 'target_article'
     template_name = 'articleapp/detail.html'
 
@@ -61,4 +64,10 @@ class ArticleListView(ListView):
     template_name = 'articleapp/list.html'
     # pagenation 설정
     paginate_by = 10
+
+'''
+# CreateView에는 Object가 없고
+# DetailView에는 Form이 없다.
+이 때 없는 것을 보충하기 위해서 있는 것이 Mixin이다.
+'''
 
