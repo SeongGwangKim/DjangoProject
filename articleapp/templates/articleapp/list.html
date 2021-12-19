@@ -20,56 +20,33 @@
 }
 
 </style>
-
+    {% if article_list %}
     <div class="container">
-      <div class="item1">
-        <img src="https://picsum.photos/200/300" alt="">
-      </div>
-      <div class="item2">
-        <img src="https://picsum.photos/200/350" alt="">
-      </div>
-      <div class="item3">
-        <img src="https://picsum.photos/200/400" alt="">
-      </div>
-      <div class="item4">
-        <img src="https://picsum.photos/200/250" alt="">
-      </div>
-      <div class="item5">
-        <img src="https://picsum.photos/200/450" alt="">
-      </div>
-      <div class="item6">
-        <img src="https://picsum.photos/200/360" alt="">
-      </div>
-      <div class="item7">
-        <img src="https://picsum.photos/200/420" alt="">
-      </div>
-      <div class="item8">
-        <img src="https://picsum.photos/200/500" alt="">
-      </div>
-      <div class="item9">
-        <img src="https://picsum.photos/200/380" alt="">
-      </div>
-      <div class="item10">
-        <img src="https://picsum.photos/200/310" alt="">
-      </div>
-      <div class="item11">
-        <img src="https://picsum.photos/200/330" alt="">
-      </div>
-      <div class="item12">
-        <img src="https://picsum.photos/200/340" alt="">
-      </div>
-      <div class="item13">
-        <img src="https://picsum.photos/200/350" alt="">
-      </div>
+      {% for article in article_list %}
+      <a href="{% url 'articleapp:detail' pk=article.pk %}">
+        <!-- for문의 article이 card.html 안에 article과 똑같다. -->
+        {% include 'snippets/card.html' with article=article %}
+      </a>
+      {% endfor %}
     </div>
+
+    <script src="{% static 'js/magicgrid.js' %}"></script>
+
+    {% else %}
+    <div>
+      <h1 class="text-center">
+        아직 게시글이 없습니다!(No Article YET!)
+      </h1>
+    </div>
+    {% endif %}
+
+    {% include 'snippets/pagination.html' with page_obj=page_obj %}
 
     <div style="text-align: center">
       <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
         게시글 생성(Create Article)
       </a>
     </div>
-
-<script src="{% static 'js/magicgrid.js' %}"></script>
 
 
 {% endblock %}

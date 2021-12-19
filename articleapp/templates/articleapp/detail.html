@@ -3,28 +3,37 @@
 {% block content %}
 
     <div style="font-size: 2rem;">
-        <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+        <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
             <h1>
                 {{ target_article.title }}
             </h1>
+            <h3>
+                {{ target_article.writer.profile.nickname }}
+            </h3>
+            <hr>
 
-            <img src="{{ target_article.image.url }}" alt="">
+            <img style="width: 100%; border-radius: 1rem; margin: 2rem 0;"
+                    src="{{ target_article.image.url }}" alt="">
 
             <p>
                 {{ target_article.content }}
             </p>
+            <hr>
 
-            <a href="{% url 'articleapp:update' pk=target_article.pk %}">
-                <p>
-                    게시글 수정(Update Article)
-                </p>
+            {% if target_article.writer == user %}
+            <a href="{% url 'articleapp:update' pk=target_article.pk %}"
+            class="btn btn-primary rounded-pill col-3">
+                    게시글 수정<br>(Update Article)
+
             </a>
 
-            <a href="{% url 'articleapp:delete' pk=target_article.pk %}">
-                <p>
-                    게시글 삭제(Delete Article)
-                </p>
+            <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
+            class="btn btn-danger rounded-pill col-3">
+                    게시글 삭제<br>(Delete Article)
+
             </a>
+            {% endif %}
+            <hr>
 
         </div>
     </div>
