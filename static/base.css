@@ -12,12 +12,36 @@
     font-family: 'Permanent Marker', cursive;
 }
 
+a {
+    color: black;
+    text-decoration-line: none;
+}
+
+a:link {
+  color : black;
+}
+a:visited {
+  color : gray;
+}
+a:hover {
+  color : blue;
+}
+a:active {
+  color : green
+}
+
+.header_nav{
+    margin: 1rem;
+}
+
+
+.header_navbar{
+    margin: 1rem 0;
+}
+
 
 @media screen and (max-width:500px) {
     html{
         font-size: 13px;
     }
 }
-
-
-

@@ -1,20 +1,22 @@
 <div style="text-align: center; margin: 1rem 0;">
     <!-- 이전 페이지로 넘어가는 링크
-    page_obj.has_previous는 현재 페이지에서 이전 페이지가 있는지 확인하는 객체 -->
+    page_obj.has_previous는 현재 페이지에서 이전 페이지가 있는지 확인하는 객체
+    href에 {% url 'articleapp:list' %}인 직접 경로가 없어도 알아서 그 주소에 해당하는 것을 가져온다.
+     -->
     {% if page_obj.has_previous %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}"
+    <a href="?page={{ page_obj.previous_page_number }}"
        class="btn btn-secondary rounded-pill">
         {{ page_obj.previous_page_number }}
     </a>
     {% endif %}
     <!-- 현재 있는 페이지를 향하는 링크 -->
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.number }}"
+    <a href="?page={{ page_obj.number }}"
        class="btn btn-secondary rounded-pill active">
         {{ page_obj.number }}
     </a>
     <!-- 다음 페이지를 향하는 링크 -->
     {% if page_obj.has_next %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}"
+    <a href="?page={{ page_obj.next_page_number }}"
        class="btn btn-secondary rounded-pill">
         {{ page_obj.next_page_number }}
     </a>
