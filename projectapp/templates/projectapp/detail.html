@@ -3,7 +3,7 @@
 {% block content %}
 
     <div style="font-size: 1rem;">
-        <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
+        <div style="text-align: center; max-width: 700px; margin: 4rem auto 3.0rem auto;">
 
             <img style="width: 12rem; height: 12rem; border-radius: 20rem; margin-bottom: 2rem; object-fit: cover;"
                     src="{{ target_project.image.url }}" alt="">
@@ -12,9 +12,25 @@
                 {{ target_project.title }}
             </h2>
 
-            <h5 style="margin-bottom: 3rem;">
-                {{ target_projcet.description }}
+            <h5>
+                {{ target_project.description }}
             </h5>
+
+            <div class="text-center mb-5">
+                {% if user.is_authenticated %}
+                {% if not subscription %}
+                <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
+                    class="btn btn-primary rounded-pill px-4">
+                    구독(Subscribe)
+                </a>
+                {% else %}
+                <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
+                    class="btn btn-dark rounded-pill px-4">
+                    구독 취소(Unsubscribe)
+                </a>
+                {% endif %}
+                {% endif %}
+            </div>
 
             <div>
                 {% include 'snippets/list_fragment.html' with article_list=object_list %}
