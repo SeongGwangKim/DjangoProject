@@ -8,10 +8,12 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import HelloWorld
+from articleapp.models import Article
 
 has_ownership = [login_required, account_ownership_required]
 
@@ -61,11 +63,18 @@ class AccountCreateView(CreateView):
 
 
 # 어떤 모델을 쓸지 그 모델 안의 정보를 어떻게 시각화할지만 신경써주면 됨
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     # 템플릿에서 사용하는 유저 객체 이름을 다르게 설정하기 -> 다른 사람이 봐도 볼 수 있게하기
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+    paginate_by = 25
+
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(writer=self.get_object())
+        return super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs)
+
 
 # @method_decorator : 일반 function에 사용하는 데코레이터를 메소드에 사용할 수 있도록 변환해주는 데코레이터
 @method_decorator(has_ownership, 'get')
