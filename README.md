@@ -2,7 +2,7 @@
 First DjangoProject
 나만의 앱 만들기
 
-# 만들면서 생겼던 에러들
+# [ 만들면서 생겼던 에러들 ]
 ## 1) namespace 관련 에러 발생
 ## sol) 연동된 urls에 app_name 설정을 확인하고 설정이 안되어있으면 추가한다.
 
