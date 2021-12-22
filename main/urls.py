@@ -21,7 +21,12 @@ from django.urls import path, include
 # 새로운 기능을 추가하기 위해서는 python manage.py starteapp 만들_앱이름
 # 그 다음에 urlpatterns에 라우팅시켜준다.
 # admin 계정 만들기 : python manage.py createsuperuser
+from articleapp.views import ArticleListView
+
 urlpatterns = [
+    # 기본 화면 설정
+    path('', ArticleListView.as_view(), name='home'),
+
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),
     path('profiles/', include('profileapp.urls')),

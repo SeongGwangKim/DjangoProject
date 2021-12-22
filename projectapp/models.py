@@ -11,5 +11,9 @@ class Project(models.Model):
 
     created_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        # f' { } ' : ' ' 앞에 f를 붙이면 { } 안에 직접 변수를 출력할 수 있다.
+        return f'{self.pk} : {self.title}'
+
 
 

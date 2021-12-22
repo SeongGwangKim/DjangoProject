@@ -35,8 +35,12 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
         project = self.object
         user = self.request.user
 
+        # 로그인이 되어 있으면 True를 반환
         if user.is_authenticated:
             subscription = Subscription.objects.filter(user=user, project=project)
+        # 로그인이 안되어 있을 때
+        else:
+            subscription = None
 
         object_list = Article.objects.filter(project = self.get_object())
         return super(ProjectDetailView, self).get_context_data(object_list=object_list, subscription=subscription, **kwargs)

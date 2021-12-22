@@ -1,22 +1,20 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import render
+
 
 # Create your views here.
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
-from accountapp.models import HelloWorld
 from articleapp.models import Article
 
 has_ownership = [login_required, account_ownership_required]
-
+'''
 # 함수형 view
 @login_required
 def hello_world(request):
@@ -48,6 +46,8 @@ def hello_world(request):
 # @login_required가 들어감으로써 필요가 없어짐
 # else:
 #     return HttpResponseRedirect(reverse('accountapp:login'))
+'''
+
 
 # class형 view
 class AccountCreateView(CreateView):

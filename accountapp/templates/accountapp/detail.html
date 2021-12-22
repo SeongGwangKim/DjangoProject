@@ -15,16 +15,17 @@
             <img src="{{ target_user.profile.image.url }}"
                  alt="" style="height: 15rem; width: 15rem; border-radius: 15rem; margin-bottom: 1.5rem; object-fit: cover;">
 
+            <br>
 
-
-            <h2 style="font-family: 'NanumHandWritingRose';">
+<!-- style="box-shadow: 0(그림자의 위치) 0(그림자의 위치) 4px(그림자의 크기)" -->
                 {{ target_user.profile.nickname }}
                 {% if target_user == user %}
-                <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-                    수정(Edit)
+                <a class="material-icons"
+                   style="box-shadow: 0 0 6px orange; border-radius: 10rem; padding: .4rem;"
+                        href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+                    edit
                 </a>
                 {% endif %}
-            </h2>
 
             <h5 style="margin-bottom: 2rem;">
                 {{ target_user.profile.message }}
@@ -46,17 +47,20 @@
             {% endif %}
 
 
-
             {% if target_user == user %}
-            <a href="{% url 'accountapp:update' pk=user.pk %}">
+            <a class="material-icons"
+                   style="box-shadow: 0 0 6px blue; border-radius: 10rem; padding: .4rem; font-size: 2rem;"
+                    href="{% url 'accountapp:update' pk=user.pk %}">
                 <p>
-                    비밀번호 변경(Change Password)
+                    manage_accounts
                 </p>
             </a>
 
-            <a href="{% url 'accountapp:delete' pk=user.pk %}">
+            <a class="material-icons"
+                   style="box-shadow: 0 0 6px red; border-radius: 10rem; padding: .4rem; font-size: 2rem;"
+                    href="{% url 'accountapp:delete' pk=user.pk %}">
                 <p>
-                    계정 삭제(Delete User Account)
+                    person_off
                 </p>
             </a>
             {% endif %}
