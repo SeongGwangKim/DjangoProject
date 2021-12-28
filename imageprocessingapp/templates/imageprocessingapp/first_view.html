@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<script src="/static/js/main.js" type="text/javascript"></script>
+
+    <div style="text-align: center; max-width: 300px; margin: 4rem auto">
+        <div class="mb-4">
+            <h4>이미지 처리<br>(Image Processing)</h4>
+        </div>
+
+        <!-- 어떤 앱에서 어떤 라우팅으로 가라 -->
+        <form action="{% url 'imageprocessingapp:create' %}" method="post" enctype="multipart/form-data">
+            <!-- post를 쓰려면 장고에서 제공하는 보안 시스템때문에 {% csrf_token %}를 써야 한다.  -->
+            {% csrf_token %}
+            <!-- form_class = UserCreationForm에 의해서 {{ form }}로 설정하면 자동으로 만들어 준다. -->
+<!--            {{ form }}-->
+            {% bootstrap_form form %}
+            <div id="btn-box" class="not-visible mt-1 mb-3">
+                <button type="submit" class="btn btn-dark rounded-pill col-5" data-filter="NO_FILTER">NO FILTER</button>
+                <button type="submit" class="btn btn-dark rounded-pill col-5" data-filter="COLORIZED">COLORIZED</button>
+                <button type="submit" class="btn btn-dark rounded-pill col-5" data-filter="GRAYSCALE">GRAYSCALE</button>
+                <button type="submit" class="btn btn-dark rounded-pill col-5" data-filter="BLURRED">BLURRED</button>
+                <button type="submit" class="btn btn-dark rounded-pill col-5" data-filter="BINARY">BINARY</button>
+                <button type="submit" class="btn btn-dark rounded-pill col-5" data-filter="INVERT">INVERT</button>
+            </div>
+            <input type="submit" class="btn btn-dark rounded-pill col-5 mt-3">
+        </form>
+    </div>
+
+{% endblock %}
+

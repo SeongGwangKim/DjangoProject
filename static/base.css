@@ -39,6 +39,9 @@ a:active {
     margin: 1rem 0;
 }
 
+.not-visible{
+    display: none
+}
 
 @media screen and (max-width:500px) {
     html{

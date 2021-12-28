@@ -15,7 +15,7 @@ class CommentCreateView(CreateView):
     # models에 있는 Comment를 가져온다.
     model = Comment
     form_class = CommentCreationForm
-    template_name = 'commentapp/create.html'
+    template_name = 'commentapp/first_view.html'
 
     def form_valid(self, form):
         temp_comment = form.save(commit=False)

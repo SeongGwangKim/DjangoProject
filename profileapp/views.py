@@ -16,7 +16,7 @@ class ProfileCreateView(CreateView):
     form_class = ProfileCreationForm
     # 'accountapp:detail'에는 pk값인 추가적인 값이 들어가야 한다.
     # success_url = reverse_lazy('accountapp:detail')
-    template_name = 'profileapp/create.html'
+    template_name = 'profileapp/first_view.html'
 
     def form_valid(self, form):
         # forms.py에서 날라온 데이터가 form 안에 들어가 있다.

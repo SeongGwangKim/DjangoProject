@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'commentapp',
     'projectapp',
     'subscribeapp',
+    'imageprocessingapp',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,5 @@ MEDIA_URL = '/media/'
 # MEDIA_ROOT는 media파일을 서버에 올렸을 때 어느 경로에 지정이 될지 그 경로의 root 바닥을 어디로 할 것인지 설정
 # os(os패키지).path(경로관련 모듈).join(합친다)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_ROOT_URL = '.'

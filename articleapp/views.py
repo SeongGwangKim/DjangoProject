@@ -17,7 +17,7 @@ from commentapp.forms import CommentCreationForm
 class ArticleCreateView(CreateView):
     model = Article
     form_class = ArticleCreationForm
-    template_name = 'articleapp/create.html'
+    template_name = 'articleapp/first_view.html'
 
     # 서버에서 유저의 writer를 지정해주기 위하여 설정
     def form_valid(self, form):
@@ -34,7 +34,7 @@ class ArticleDetailView(DetailView, FormMixin):
     model = Article
     form_class = CommentCreationForm
     context_object_name = 'target_article'
-    template_name = 'articleapp/detail.html'
+    template_name = 'articleapp/uimage.html'
 
 
 @method_decorator(article_ownership_required, 'get')

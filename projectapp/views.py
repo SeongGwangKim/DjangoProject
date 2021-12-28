@@ -17,7 +17,7 @@ from subscribeapp.models import Subscription
 class ProjectCreateView(CreateView):
     model = Project
     form_class = ProjectCreationForm
-    template_name = 'projectapp/create.html'
+    template_name = 'projectapp/first_view.html'
 
     def get_success_url(self):
         return reverse('projectapp:detail', kwargs={'pk': self.object.pk})
@@ -26,7 +26,7 @@ class ProjectCreateView(CreateView):
 class ProjectDetailView(DetailView, MultipleObjectMixin):
     model = Project
     context_object_name = 'target_project'
-    template_name = 'projectapp/detail.html'
+    template_name = 'projectapp/uimage.html'
 
     paginate_by = 25
 

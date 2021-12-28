@@ -59,7 +59,7 @@ class AccountCreateView(CreateView):
     # reverse_lazy는 class형 view에서 사용, reverse는 함수형 view에서 사용한다.
     success_url = reverse_lazy('accountapp:hello_world')
     # 회원가입을 할 때 볼 html 설정
-    template_name = 'accountapp/create.html'
+    template_name = 'accountapp/first_view.html'
 
 
 # 어떤 모델을 쓸지 그 모델 안의 정보를 어떻게 시각화할지만 신경써주면 됨
@@ -67,7 +67,7 @@ class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     # 템플릿에서 사용하는 유저 객체 이름을 다르게 설정하기 -> 다른 사람이 봐도 볼 수 있게하기
     context_object_name = 'target_user'
-    template_name = 'accountapp/detail.html'
+    template_name = 'accountapp/uimage.html'
 
     paginate_by = 25
 

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="text-align: center; max-width: 1000px; margin: 4rem auto">
+        <h1>image upload</h1>
+          <form method="POST" class="post-form" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="save btn btn-dark" value="upload">save!!</button>
+          </form>
+        <br>
+        {% if uploaded_file_url %}
+          <img src="{{ uploaded_file_url }}">
+          <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+        {% endif %}
+    </div>
+{% endblock %}
